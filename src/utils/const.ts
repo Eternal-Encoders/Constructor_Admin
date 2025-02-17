@@ -17,7 +17,7 @@ export function getDefaultGraphPoint(options: IOption): IGraphPoint {
     }
 }
 
-export function getDfaultTime(): ITime {
+export function getDefaultTime(): ITime {
     return {
         from: "00:00",
         to: "00:00"
