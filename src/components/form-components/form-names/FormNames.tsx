@@ -1,26 +1,21 @@
-import {
-    FormGroup, 
-    FormLabel, 
-    FormControl, 
-    Button
-} from "react-bootstrap";
-
+import { Button, FilledInput, FormControl, Stack, Typography } from "@mui/material";
 import "./form-names-style.css";
 
 interface FormNamesProps {
     names: string[],
-    setNames: (names: string[]) => void
+    setNames: (names: string[]) => void;
 }
 
-function FormNames({names, setNames}: FormNamesProps) {
+function FormNames({ names, setNames }: FormNamesProps) {
     return (
-        <FormGroup>
-            <FormLabel>Названия</FormLabel>
+        <FormControl>
+            <Typography>Названия</Typography>
+            <Stack direction='column'>
                 {names.map((el, index) => {
                     return <>
-                        <FormControl 
+                        <FilledInput
                             key={index}
-                            type="text" 
+                            type="text"
                             placeholder="Название"
                             value={el}
                             onChange={(e) => {
@@ -28,29 +23,28 @@ function FormNames({names, setNames}: FormNamesProps) {
                                 setNames(names);
                             }}
                         />
-                    </>
+                    </>;
                 })}
-                    <Button 
-                        style={{
-                            marginRight: "10px"
-                        }}
-                        onClick={() => {
-                            names.push("");
-                            setNames(names);
-                        }}
-                    >
-                        +
-                    </Button>
-                    <Button 
-                        className=""
-                        onClick={() => {
-                            names.pop();
-                            setNames(names);
-                        }}
-                    >
-                        -
-                    </Button>
-        </FormGroup>
+            </Stack>
+            <Stack direction={'row'}>
+                <Button
+                    onClick={() => {
+                        names.push("");
+                        setNames(names);
+                    }}
+                >
+                    +
+                </Button>
+                <Button
+                    onClick={() => {
+                        names.pop();
+                        setNames(names);
+                    }}
+                >
+                    -
+                </Button>
+            </Stack>
+        </FormControl>
     );
 }
 

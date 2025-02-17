@@ -1,18 +1,19 @@
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { Button, styled } from "@mui/material";
 import React, { useContext } from "react";
-import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
-import { IMapObject } from "../../utils/Interfaces";
 import { MapContext } from "../../contexts/MapContext";
 import { getDefaultGraphPoint } from "../../utils/const";
+import { IMapObject } from "../../utils/Interfaces";
 
 interface MapUploaderProps {
-    onUpload: (isUpload: boolean) => void
+    onUpload: (isUpload: boolean) => void;
 }
 
-function MapUploader({onUpload}: MapUploaderProps) {
+function MapUploader({ onUpload }: MapUploaderProps) {
     const {
-        updateAuditorium, 
+        updateAuditorium,
         updateGraphPoint,
-        setOption, 
+        setOption,
         setService
     } = useContext(MapContext);
 
@@ -41,9 +42,9 @@ function MapUploader({onUpload}: MapUploaderProps) {
                         const prop_val = graphPoint[prop_key];
                         if (!prop_val) {
                             //@ts-expect-error Call by property name
-                            graphPoint[prop_key] = defPoint[prop_key]
+                            graphPoint[prop_key] = defPoint[prop_key];
                         }
-                    })
+                    });
                     updateGraphPoint(key, graphPoint);
                 });
                 setOption({
@@ -53,16 +54,38 @@ function MapUploader({onUpload}: MapUploaderProps) {
                     height: json.height
                 });
                 setService(json.service);
-            }
+            };
             onUpload(false);
         }
     }
 
+    const VisuallyHiddenInput = styled('input')({
+        clip: 'rect(0 0 0 0)',
+        clipPath: 'inset(50%)',
+        height: 1,
+        overflow: 'hidden',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        whiteSpace: 'nowrap',
+        width: 1,
+    });
+
     return (
-        <FormGroup>
-            <FormLabel>Загрузить json объект этажа</FormLabel>
-            <FormControl type="file" onChange={onChangeHandler} />
-        </FormGroup>
+        <Button
+            component="label"
+            role={undefined}
+            variant="contained"
+            tabIndex={-1}
+            startIcon={<CloudUploadIcon />}
+        >
+            Загрузить json объект этажа
+            <VisuallyHiddenInput
+                type="file"
+                onChange={onChangeHandler}
+                multiple
+            />
+        </Button>
     );
 }
 

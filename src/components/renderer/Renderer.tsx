@@ -1,18 +1,18 @@
 import { useContext, useEffect, useState } from "react";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import { DrawContext } from "../../contexts/DrawContext";
-import Menu from "../menu/Menu";
-import Map from "../map/Map";
+import { MapContext } from "../../contexts/MapContext";
+import { PointTypes } from "../../utils/Interfaces";
+import { getRandomString } from "../../utils/Utils";
 import Graph from "../graph/Graph";
 import LinksLayer from "../links-layer/LinksLayer";
-import { getRandomString } from "../../utils/Utils";
-import { PointTypes } from "../../utils/Interfaces";
-import { MapContext } from "../../contexts/MapContext";
+import Map from "../map/Map";
+import Menu from "../menu/Menu";
 import ServiceContainer from "../service-container/ServiceContainer";
 
 function Renderer() {
     const {
-        isMovingDisable, 
+        isMovingDisable,
         curGraphPoint,
         setIsMovingDisable,
         setCurGraphPoint
@@ -42,7 +42,7 @@ function Renderer() {
                 id: newPointId,
                 x: (e.clientX - position.x) / scale,
                 y: (e.clientY - position.y) / scale,
-                links: curGraphPoint ? [curGraphPoint]: [],
+                links: curGraphPoint ? [curGraphPoint] : [],
                 types: [PointTypes.Corridor],
                 names: [],
                 floor: options.floor,
@@ -65,7 +65,7 @@ function Renderer() {
                         setCurGraphPoint(undefined);
                     }
                     break;
-            
+
                 default:
                     break;
             }
@@ -78,11 +78,11 @@ function Renderer() {
             window.removeEventListener('click', handelOnClick);
             window.removeEventListener('contextmenu', handelonContextMenu);
             window.removeEventListener('keyup', handelOnKeyup);
-        }
+        };
     }, [
-        curGraphPoint, 
-        graph, 
-        position, 
+        curGraphPoint,
+        graph,
+        position,
         scale,
         options,
         deleteGraphPoint,
@@ -94,7 +94,7 @@ function Renderer() {
         <>
             <LinksLayer points={graph} />
             <Menu
-                dataId={curGraphPoint ? curGraphPoint: undefined} 
+                dataId={curGraphPoint ? curGraphPoint : undefined}
             />
             <TransformWrapper
                 disabled={isMovingDisable}
@@ -104,22 +104,22 @@ function Renderer() {
                 limitToBounds={false}
                 onPanningStart={(ref, e) => {
                     if ((e as MouseEvent).button === 0) {
-                        setIsMovingDisable(true)
+                        setIsMovingDisable(true);
                     }
-                    ref
+                    ref;
                 }}
                 onPanningStop={() => setIsMovingDisable(false)}
                 onTransformed={(ref, state) => {
                     setScale(state.scale);
                     setPosition({ x: state.positionX, y: state.positionY });
-                    ref
+                    ref;
                 }}
             >
                 <TransformComponent
                     wrapperStyle={{
                         position: 'absolute',
-                        height: '100vh', 
-                        width: '100vw' 
+                        height: '100vh',
+                        width: '100vw'
                     }}
                 >
                     <ServiceContainer services={service} width={options.width} height={options.height} />

@@ -1,26 +1,20 @@
-import {
-    FormGroup, 
-    FormLabel, 
-    FormControl 
-} from "react-bootstrap";
-
+import { FilledInput, FormControl, InputLabel } from "@mui/material";
 import "./form-stair-id-style.css";
 
 interface FormStairIdProps {
     stairId: string,
-    setStairId: (stairId: string) => void
+    setStairId: (stairId: string) => void;
 }
 
-function FormStairId({stairId, setStairId}: FormStairIdProps) {
+function FormStairId({ stairId, setStairId }: FormStairIdProps) {
     return (
-        <FormGroup>
-            <FormLabel>Id лестницы</FormLabel>
-            <FormControl 
-                type="text" 
+        <FormControl>
+            <InputLabel>Id лестницы</InputLabel>
+            <FilledInput
                 value={stairId}
-                onChange={(e) => setStairId(e.target.value)}
+                onChange={(e: { target: { value: string; }; }) => setStairId(e.target.value)}
             />
-        </FormGroup>
+        </FormControl>
     );
 }
 

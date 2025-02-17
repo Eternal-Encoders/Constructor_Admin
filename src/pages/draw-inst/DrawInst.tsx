@@ -1,7 +1,7 @@
+import { Container, Stack } from "@mui/material";
 import { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import Renderer from "../../components/renderer/Renderer";
 import MapUploader from "../../components/map-uploader/MapUploader";
+import Renderer from "../../components/renderer/Renderer";
 import { DrawState } from "../../contexts/DrawContext";
 import { MapState } from "../../contexts/MapContext";
 
@@ -12,19 +12,15 @@ function DrawInst() {
         <DrawState>
             <MapState>
                 {isUpload ?
-                    <Container fluid style={{height: "100vh"}}>
-                        <Row className="h-100 d-flex align-items-center">
-                            <Row>
-                                <Col />
-                                <Col className="d-flex justify-content-center">
-                                    <MapUploader onUpload={setIsUpload} />
-                                </Col>
-                                <Col />
-                            </Row>
-                        </Row>
+                    <Container maxWidth={false} >
+                        <Stack direction="row" height={100} alignItems={"center"}>
+                            <Stack direction='column' justifyContent={"center"} >
+                                <MapUploader onUpload={setIsUpload} />
+                            </Stack>
+                        </Stack>
                     </Container>
                     :
-                    <Renderer /> 
+                    <Renderer />
                 }
             </MapState>
         </DrawState>

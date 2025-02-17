@@ -1,20 +1,20 @@
 import { useContext } from "react";
-import { Button } from "react-bootstrap";
 import { MapContext } from "../../contexts/MapContext";
 
-import "./download-style.css";
+import { Button } from "@mui/material";
 import { IMapObject } from "../../utils/Interfaces";
+import "./download-style.css";
 
 interface DownloadProps {
     institiute: string,
-    floor: number
+    floor: number;
 }
 
-function Download({institiute, floor}: DownloadProps) {
+function Download({ institiute, floor }: DownloadProps) {
     const {
-        graph, 
-        audiences, 
-        options, 
+        graph,
+        audiences,
+        options,
         service
     } = useContext(MapContext);
 
@@ -35,7 +35,7 @@ function Download({institiute, floor}: DownloadProps) {
 
     return (
         <>
-            <Button onClick={handelOnClick}>
+            <Button variant="contained" onClick={handelOnClick}>
                 Скачать граф
             </Button>
         </>

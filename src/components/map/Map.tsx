@@ -1,14 +1,13 @@
-import {  } from "react-bootstrap";
 import { IAuditorium } from "../../utils/Interfaces";
 import Auditorium from "../auditorium/Auditorium";
 
-import "./map-style.css"
+import "./map-style.css";
 
 interface MapProps {
-    audiences: { [id: string]: IAuditorium }
+    audiences: { [id: string]: IAuditorium; };
 }
 
-function Map({audiences}: MapProps) {
+function Map({ audiences }: MapProps) {
     return (
         <div className="map">
             {Object.keys(audiences).map((key) => {
@@ -25,7 +24,7 @@ function Map({audiences}: MapProps) {
                     fill={el.fill}
                     stroke={el.stroke}
                     children={el.children}
-                />
+                />;
             })}
         </div>
     );

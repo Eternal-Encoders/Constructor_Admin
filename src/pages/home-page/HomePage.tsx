@@ -1,11 +1,4 @@
-import { Box, Divider, Grid2, Typography } from "@mui/material";
-import {
-    Button,
-    ButtonGroup,
-    Col,
-    Container,
-    Row,
-} from "react-bootstrap";
+import { Box, Button, Container, Divider, Grid2, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useGetInstitutesQuery } from "../../features/api/apiSlice";
 import { getOrigin } from "../../utils/network";
@@ -19,23 +12,13 @@ function HomePage() {
     return (
         <>
 
-            <Container fluid style={{ margin: '40px auto 40px auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', }}>
-                <Row className="h-100 d-flex align-items-center">
-                    <Row>
-                        <Col />
-                        <Col className="d-flex justify-content-center">
-                            <ButtonGroup>
-                                <Link to={"/drawinst"}>
-                                    <Button>Отрисовать институт</Button>
-                                </Link>
-                            </ButtonGroup>
-                        </Col>
-                        <Col />
-                    </Row>
-                </Row>
+            <Container maxWidth={false} style={{ margin: '40px auto 40px auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', }}>
+                <Link to={"/drawinst"}>
+                    <Button variant="outlined">Отрисовать институт</Button>
+                </Link>
             </Container>
 
-            <Container fluid style={{ margin: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+            <Container maxWidth={false} style={{ margin: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                 {data &&
                     <Grid2 container columnSpacing={10} columns={6}>
                         {data.map((e) => {
